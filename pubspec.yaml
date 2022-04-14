@@ -1,0 +1,37 @@
+name: clean_architecture_implementations
+description:  Proof of Concept of various implementations using Clean Architecture
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Functional programming features
+  dartz: ^0.10.1
+
+  # HTTP Client
+  http: ^0.13.4
+
+  # Routing and code modularization
+  flutter_modular: ^4.5.1+1
+
+  # State management solution
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+
+  # Some tools to manage CPFs
+  cpf_util: ^3.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Mock library for unit tests
+  mocktail: ^0.3.0
+
+flutter:
+  uses-material-design: true
