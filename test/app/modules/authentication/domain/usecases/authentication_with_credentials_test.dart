@@ -11,23 +11,20 @@ import 'package:mocktail/mocktail.dart';
 
 class LoginRepositorySpy extends Mock implements LoginRepository {}
 
-class AuthenticationValidatorsSpy extends Mock
-    implements AuthenticationValidators {}
-
 class UserFake extends Fake implements User {}
 
 void main() {
   late LoginRepository repositorySpy;
-  late AuthenticationValidators validatorsSpy;
+  late AuthenticationValidators validators;
   late AuthenticationWithCredentials usecase;
 
   setUp(() {
     registerFallbackValue(UserFake());
     repositorySpy = LoginRepositorySpy();
-    validatorsSpy = AuthenticationValidatorsSpy();
+    validators = const AuthenticationValidatorsImplementation();
     usecase = AuthenticationWithCredentialsImplementation(
       repositorySpy,
-      validatorsSpy,
+      validators,
     );
   });
 
@@ -42,14 +39,12 @@ void main() {
     // Arrange
     final tUser = UserFake();
     final tEmail = faker.internet.email();
-    final tPassword = faker.internet.password();
+    final tPassword = faker.internet.password(length: 16);
     final tParameters = AuthenticationWithCredentialsParameters(
       email: tEmail,
       password: tPassword,
     );
 
-    when(() => validatorsSpy.hasValidEmailAddress(tEmail)).thenReturn(true);
-    when(() => validatorsSpy.hasValidPassword(tPassword)).thenReturn(true);
     when(() => repositorySpy.authenticationWithCredentials(tParameters))
         .thenAnswer((_) async => Right(tUser));
 
@@ -66,10 +61,7 @@ void main() {
       ),
     );
     verify(() => repositorySpy.authenticationWithCredentials(tParameters));
-    verify(() => validatorsSpy.hasValidEmailAddress(tEmail));
-    verify(() => validatorsSpy.hasValidPassword(tPassword));
     verifyNoMoreInteractions(repositorySpy);
-    verifyNoMoreInteractions(validatorsSpy);
   });
 
   test(
@@ -83,15 +75,11 @@ void main() {
       password: tPassword,
     );
 
-    when(() => validatorsSpy.hasValidEmailAddress(tEmail)).thenReturn(false);
-
     // Act
     final result = await usecase(tParameters);
 
     // Assert
     expect(result.fold(id, id), isA<InvalidEmailFailure>());
-    verify(() => validatorsSpy.hasValidEmailAddress(tEmail));
-    verifyNoMoreInteractions(validatorsSpy);
     verifyZeroInteractions(repositorySpy);
   });
 
@@ -100,23 +88,17 @@ void main() {
       () async {
     // Arrange
     final tEmail = faker.internet.email();
-    const tPassword = '';
+    const tPassword = 'weakpassword';
     final tParameters = AuthenticationWithCredentialsParameters(
       email: tEmail,
       password: tPassword,
     );
-
-    when(() => validatorsSpy.hasValidEmailAddress(tEmail)).thenReturn(true);
-    when(() => validatorsSpy.hasValidPassword(tPassword)).thenReturn(false);
 
     // Act
     final result = await usecase(tParameters);
 
     // Assert
     expect(result.fold(id, id), isA<InvalidPasswordFailure>());
-    verify(() => validatorsSpy.hasValidEmailAddress(tEmail));
-    verify(() => validatorsSpy.hasValidPassword(tPassword));
-    verifyNoMoreInteractions(validatorsSpy);
     verifyZeroInteractions(repositorySpy);
   });
 
@@ -124,15 +106,13 @@ void main() {
       () async {
     // Arrange
     final tEmail = faker.internet.email();
-    final tPassword = faker.internet.password();
+    final tPassword = faker.internet.password(length: 16);
     final tParameters = AuthenticationWithCredentialsParameters(
       email: tEmail,
       password: tPassword,
     );
     const tErrorMessage = 'Unexpected error';
 
-    when(() => validatorsSpy.hasValidEmailAddress(tEmail)).thenReturn(true);
-    when(() => validatorsSpy.hasValidPassword(tPassword)).thenReturn(true);
     when(() => repositorySpy.authenticationWithCredentials(tParameters))
         .thenThrow(Exception(tErrorMessage));
 
@@ -148,10 +128,7 @@ void main() {
         'Exception: $tErrorMessage',
       ),
     );
-    verify(() => validatorsSpy.hasValidEmailAddress(tEmail));
-    verify(() => validatorsSpy.hasValidPassword(tPassword));
     verify(() => repositorySpy.authenticationWithCredentials(tParameters));
-    verifyNoMoreInteractions(validatorsSpy);
     verifyNoMoreInteractions(repositorySpy);
   });
 }
