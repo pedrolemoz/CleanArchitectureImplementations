@@ -30,5 +30,8 @@ dev_dependencies:
   # Mock library for unit tests
   mocktail: ^0.3.0
 
+  # Fake data generator
+  faker: ^2.0.0
+
 flutter:
   uses-material-design: true
