@@ -23,9 +23,6 @@ dependencies:
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
 
-  # Some tools to manage CPFs
-  cpf_util: ^3.0.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
