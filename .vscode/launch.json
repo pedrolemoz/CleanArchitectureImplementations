@@ -5,7 +5,10 @@
             "name": "Dart: Run all Tests",
             "type": "dart",
             "request": "launch",
-            "program": "./test/"
+            "program": "./test/",
+            "args": [
+                "--coverage"
+            ]
         },
         {
             "name": "Clean Architecture Implementations App",
