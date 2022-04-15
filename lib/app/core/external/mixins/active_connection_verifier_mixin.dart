@@ -1,6 +1,6 @@
 import 'dart:io';
 
-mixin ActiveNetworkVerifier {
+mixin ActiveNetworkVerifierMixin {
   Future<bool> get hasActiveNetwork async {
     try {
       await Socket.connect(
