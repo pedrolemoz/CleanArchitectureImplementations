@@ -6,4 +6,4 @@ class ServerFailure extends Failure {
 
 class NoInternetConnectionFailure extends Failure {}
 
-class UnknownFailure extends Failure {}
+class UnableToGetUserDataFailure extends Failure {}
