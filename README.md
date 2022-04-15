@@ -19,8 +19,8 @@ Many developers ask me how would I implement a certain feature in their projects
 
 ### Roadmap
 
-- [ ] Authentication
-    - [ ] with email and password
+- [ ] Authentication (with Firebase)
+    - [x] with email and password
     - [ ] with Google
     - [ ] with Facebook
 
