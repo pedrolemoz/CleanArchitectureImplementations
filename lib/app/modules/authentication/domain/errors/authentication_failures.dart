@@ -7,3 +7,7 @@ class AuthenticationFailure extends Failure {
 class InvalidEmailFailure extends AuthenticationFailure {}
 
 class InvalidPasswordFailure extends AuthenticationFailure {}
+
+class InvalidCredentialsFailure extends AuthenticationFailure {}
+
+class NoUserFoundFailure extends AuthenticationFailure {}
