@@ -1,7 +1,11 @@
 import 'dart:io';
 
-mixin ActiveNetworkVerifierMixin {
-  Future<bool> get hasActiveNetwork async {
+import '../abstractions/network_connectivity_checker.dart';
+
+class NetworkConnectivityCheckerImplementation
+    implements NetworkConnectivityChecker {
+  @override
+  Future<bool> hasActiveNetwork() async {
     try {
       await Socket.connect(
         '1.1.1.1',
