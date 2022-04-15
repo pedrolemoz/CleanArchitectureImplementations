@@ -1,5 +1,5 @@
 name: clean_architecture_implementations
-description:  Proof of Concept of various implementations using Clean Architecture
+description: Proof of Concept of various implementations using Clean Architecture
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -22,6 +22,11 @@ dependencies:
   # State management solution
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
+
+  # Firebase dependencies
+  firebase_core: ^1.14.1
+  firebase_auth: ^3.3.14
+  cloud_firestore: ^3.1.12
 
 dev_dependencies:
   flutter_test:
