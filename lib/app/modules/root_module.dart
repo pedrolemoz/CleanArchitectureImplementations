@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'authentication/authentication_module.dart';
+import 'initialization/initialization_module.dart';
 
 class RootModule extends Module {
   @override
@@ -11,6 +12,21 @@ class RootModule extends Module {
   List<ModularRoute> get routes => [
         ModuleRoute(
           '/',
+          module: InitializationModule(),
+          transition: TransitionType.custom,
+          customTransition: CustomTransition(
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeThroughTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
+              );
+            },
+          ),
+        ),
+        ModuleRoute(
+          '/authentication',
           module: AuthenticationModule(),
           transition: TransitionType.custom,
           customTransition: CustomTransition(
