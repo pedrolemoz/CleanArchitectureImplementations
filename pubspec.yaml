@@ -23,6 +23,9 @@ dependencies:
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
 
+  # UI
+  animations: ^2.0.2
+
   # Firebase dependencies
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
