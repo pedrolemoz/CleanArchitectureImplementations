@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:magnet_ui/magnet_ui.dart';
 
 class AppRoot extends StatefulWidget {
   const AppRoot({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _AppRootState extends State<AppRoot> {
     return MaterialApp.router(
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
+      theme: AppTheme.light(fontFamily: 'Poppins'),
       title: 'Clean Architecture Implementations',
       debugShowCheckedModeBanner: false,
     );

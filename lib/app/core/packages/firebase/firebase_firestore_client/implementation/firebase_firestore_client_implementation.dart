@@ -13,7 +13,7 @@ class FirebaseFirestoreClientImplementation implements FirebaseFirestoreClient {
       final firestoreService = FirebaseFirestore.instance;
 
       final userDocument = await firestoreService
-          .collection('user_data')
+          .collection('data')
           .doc(userUniqueIdentifier)
           .get();
 
