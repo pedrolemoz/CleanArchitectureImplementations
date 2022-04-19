@@ -25,7 +25,7 @@ dependencies:
 
   # UI
   magnet_ui:
-    path: ../magnet_ui
+    git: git@github.com:pedrolemoz/MagnetUI.git
   unicons: ^2.1.0
   animations: ^2.0.2
 
