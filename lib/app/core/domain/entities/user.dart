@@ -12,7 +12,4 @@ class User {
 
     return other is User && other.userName == userName && other.email == email;
   }
-
-  @override
-  int get hashCode => userName.hashCode ^ email.hashCode;
 }

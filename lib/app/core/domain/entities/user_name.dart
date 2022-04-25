@@ -14,7 +14,4 @@ class UserName {
         other.firstName == firstName &&
         other.lastName == lastName;
   }
-
-  @override
-  int get hashCode => firstName.hashCode ^ lastName.hashCode;
 }

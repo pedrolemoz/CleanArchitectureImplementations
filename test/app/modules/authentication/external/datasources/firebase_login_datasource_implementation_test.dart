@@ -83,11 +83,17 @@ void main() {
     // Assert
     expect(
       result,
-      isA<User>().having(
-        (success) => success,
-        'Has the expected entity',
-        tUser,
-      ),
+      isA<User>()
+          .having(
+            (success) => success,
+            'Has the expected entity',
+            tUser,
+          )
+          .having(
+            (success) => success.userName.fullName,
+            'Has the expected full name',
+            tUser.userName.fullName,
+          ),
     );
     verify(() => connectivityCheckerSpy.hasActiveNetwork());
     verify(

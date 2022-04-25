@@ -1,7 +1,4 @@
 import 'package:clean_architecture_implementations/app/core/domain/entities/user.dart';
-import 'package:clean_architecture_implementations/app/core/domain/errors/global_failures.dart';
-import 'package:clean_architecture_implementations/app/core/infrastructure/exceptions/no_internet_connection_exception.dart';
-import 'package:clean_architecture_implementations/app/core/infrastructure/exceptions/server_exception.dart';
 import 'package:clean_architecture_implementations/app/core/infrastructure/handlers/core_exceptions_handler.dart';
 import 'package:clean_architecture_implementations/app/core/infrastructure/handlers/core_exceptions_handler_implementation.dart';
 import 'package:clean_architecture_implementations/app/modules/authentication/domain/errors/authentication_failures.dart';
@@ -96,39 +93,6 @@ void main() {
 
     // Assert
     expect(result.fold(id, id), isA<NoUserFoundFailure>());
-    verify(() => dataSourceSpy.authenticationWithCredentials(tParameters));
-    verifyNoMoreInteractions(dataSourceSpy);
-  });
-
-  test(
-      'Should return NoInternetConnectionFailure when the DataSource throw NoInternetConnectionException',
-      () async {
-    // Arrange
-    const tException = NoInternetConnectionException();
-    when(() => dataSourceSpy.authenticationWithCredentials(tParameters))
-        .thenThrow(tException);
-
-    // Act
-    final result = await repository.authenticationWithCredentials(tParameters);
-
-    // Assert
-    expect(result.fold(id, id), isA<NoInternetConnectionFailure>());
-    verify(() => dataSourceSpy.authenticationWithCredentials(tParameters));
-    verifyNoMoreInteractions(dataSourceSpy);
-  });
-
-  test('Should return ServerFailure when the DataSource throw ServerException',
-      () async {
-    // Arrange
-    const tException = ServerException(data: '');
-    when(() => dataSourceSpy.authenticationWithCredentials(tParameters))
-        .thenThrow(tException);
-
-    // Act
-    final result = await repository.authenticationWithCredentials(tParameters);
-
-    // Assert
-    expect(result.fold(id, id), isA<ServerFailure>());
     verify(() => dataSourceSpy.authenticationWithCredentials(tParameters));
     verifyNoMoreInteractions(dataSourceSpy);
   });
