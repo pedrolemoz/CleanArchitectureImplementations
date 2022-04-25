@@ -7,6 +7,7 @@ import 'external/firebase_login_datasource_implementation.dart';
 import 'infrastructure/repositories/login_repository_implementation.dart';
 import 'presentation/controllers/bloc/login_bloc.dart';
 import 'presentation/pages/login_page.dart';
+import 'presentation/pages/welcome_page.dart';
 import 'utils/validators/authentication_validators.dart';
 
 class AuthenticationModule extends Module {
@@ -25,6 +26,21 @@ class AuthenticationModule extends Module {
         ChildRoute(
           '/',
           child: (_, __) => LoginPage(),
+          transition: TransitionType.custom,
+          customTransition: CustomTransition(
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeThroughTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
+              );
+            },
+          ),
+        ),
+        ChildRoute(
+          '/welcome',
+          child: (_, args) => WelcomePage(user: args.data),
           transition: TransitionType.custom,
           customTransition: CustomTransition(
             transitionDuration: const Duration(milliseconds: 400),

@@ -1,5 +1,7 @@
 import 'package:magnet_ui/magnet_ui.dart';
 
+import '../../../../../core/domain/entities/user.dart';
+
 class AuthenticatingUserState implements ProcessingState {
   @override
   final String? message;
@@ -10,8 +12,9 @@ class AuthenticatingUserState implements ProcessingState {
 class SuccessfullyAuthenticatedUserState implements SuccessState {
   @override
   final String? message;
+  final User user;
 
-  SuccessfullyAuthenticatedUserState([this.message]);
+  SuccessfullyAuthenticatedUserState(this.user, [this.message]);
 }
 
 class InvalidEmailState implements ErrorState {

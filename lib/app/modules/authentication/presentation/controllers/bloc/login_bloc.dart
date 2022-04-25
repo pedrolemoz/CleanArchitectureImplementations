@@ -38,20 +38,20 @@ class LoginBloc extends Bloc<AuthenticationEvents, AppState> with Disposable {
         (failure) {
           switch (failure.runtimeType) {
             case InvalidEmailFailure:
-              return InvalidEmailState();
+              return InvalidEmailState('The entered email is not valid');
             case InvalidPasswordFailure:
-              return InvalidPasswordState();
+              return InvalidPasswordState('The entered password is not valid');
             case InvalidCredentialsFailure:
-              return InvalidCredentialsState();
+              return InvalidCredentialsState('Your credentials are invalid');
             case NoUserFoundFailure:
-              return NoUserFoundState();
+              return NoUserFoundState(
+                'No user were found with these credentials',
+              );
             default:
               return _statesHandler.handleFailure(failure);
           }
         },
-        (success) {
-          return SuccessfullyAuthenticatedUserState();
-        },
+        (success) => SuccessfullyAuthenticatedUserState(success),
       ),
     );
   }
