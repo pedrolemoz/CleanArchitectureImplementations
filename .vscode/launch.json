@@ -5,12 +5,15 @@
             "name": "Run all Tests",
             "type": "dart",
             "request": "launch",
-            "program": "./test/"
+            "program": "./test/",
+            "args": [
+                "--coverage"
+            ]
         },
         {
             "name": "Clean App",
             "request": "launch",
             "type": "dart"
-        },  
+        },
     ]
 }
